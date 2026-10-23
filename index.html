@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Android Root Wipe Script Generator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 强制弹窗：用户守则 -->
+<div id="agreementOverlay" class="overlay">
+  <div class="agreement-box">
+    <h2 class="agreement-title">⚠ 用户守则 / USER AGREEMENT ⚠</h2>
+    <div class="agreement-text">
+      <p>1. 本工具仅用于技术学习与虚拟机/模拟器环境测试，严禁在日常使用的主力设备上直接运行生成的脚本。</p>
+      <p>2. 生成的脚本包含真实删除命令（rm -rf），运行时会强制要求人工输入确认口令并倒计时10秒，用户须自行确认执行环境无误后再继续。</p>
+      <p>3. 任何因在真机、未备份设备、他人设备上运行脚本导致的数据丢失、设备变砖、硬件损坏或其他后果，全部由使用者本人承担，本工具作者不承担任何责任。</p>
+      <p>4. 禁止将脚本用于破坏他人设备、恶意擦除数据或任何违法用途。使用者须遵守当地法律法规。</p>
+      <p>5. 如不接受以上任何一条，请立即关闭页面，禁止使用本工具。继续使用即视为你已完全理解并同意上述全部条款。</p>
+      <p class="agreement-warn">再次警告：rm -rf 是不可逆操作，删除的数据无法恢复。请务必在测试环境中验证脚本行为后再考虑任何实际使用。</p>
+    </div>
+    <button id="agreeBtn" class="agree-btn" disabled>请仔细阅读…（<span id="countdownNum">3</span>s）</button>
+  </div>
+</div>
+
+<!-- 顶部红色警告横幅 -->
+<div class="top-banner">
+  ⚠ 警告：本工具生成的脚本包含真实数据销毁命令，仅可在虚拟机内测试，后果自负 ⚠
+</div>
+
+<div class="container">
+  <h1 class="main-title">▓▒░ ANDROID ROOT WIPE SCRIPT GENERATOR ░▒▓</h1>
+
+  <!-- 配置区 -->
+  <div class="panel">
+    <h3>[ 配置 CONFIGURATION ]</h3>
+
+    <label class="field-label">脚本 Banner 大字标题（留空则不打印）</label>
+    <input type="text" id="bannerTitle" class="terminal-input" placeholder="例: WIPE-DEVICE v1.0" maxlength="40">
+
+    <label class="field-label">加密 / 打包方案</label>
+    <select id="encryptMode" class="terminal-input">
+      <option value="none">无加密（原始 .sh）</option>
+      <option value="makeself">makeself 自解压打包</option>
+      <option value="openssl">OpenSSL AES-256 加密脚本（运行时输入解密密码）</option>
+      <option value="shc">shc 编译为二进制</option>
+    </select>
+
+    <label class="field-label">要清理的 Android 目录（多选）</label>
+    <div class="checkbox-group" id="dirList">
+      <label class="checkbox-item"><input type="checkbox" value="/data" checked> <span>/data</span> <em>— 用户数据分区</em></label>
+      <label class="checkbox-item"><input type="checkbox" value="/sdcard"> <span>/sdcard</span> <em>— 内部存储</em></label>
+      <label class="checkbox-item"><input type="checkbox" value="/cache"> <span>/cache</span> <em>— 系统缓存</em></label>
+      <label class="checkbox-item"><input type="checkbox" value="/system"> <span>/system</span> <em>— 系统分区</em></label>
+      <label class="checkbox-item"><input type="checkbox" value="/vendor"> <span>/vendor</span> <em>— 厂商分区</em></label>
+      <label class="checkbox-item"><input type="checkbox" value="/efs"> <span>/efs</span> <em>— 基带/IMEI（高危！）</em></label>
+      <label class="checkbox-item"><input type="checkbox" value="/persist"> <span>/persist</span> <em>— 传感器持久化数据</em></label>
+      <label class="checkbox-item"><input type="checkbox" value="/metadata"> <span>/metadata</span> <em>— 元数据分区</em></label>
+      <label class="checkbox-item danger"><input type="checkbox" value="/boot"> <span>/boot /recovery</span> <em>— 启动相关（变砖风险极高！）</em></label>
+    </div>
+
+    <label class="checkbox-item selfdel">
+      <input type="checkbox" id="selfDelete"> <span>脚本末尾自删除自身（rm -f $0）</span>
+    </label>
+
+    <button id="generateBtn" class="gen-btn">▶ 生成脚本 GENERATE</button>
+  </div>
+
+  <!-- 输出区 -->
+  <div class="panel output-panel">
+    <h3>[ 生成结果 OUTPUT ]</h3>
+    <div class="output-actions">
+      <button id="copyBtn" class="action-btn">📋 复制</button>
+      <button id="downloadBtn" class="action-btn">⬇ 下载 .sh</button>
+    </div>
+    <pre id="outputArea" class="terminal-output"><code class="language-bash">// 配置后点击「生成脚本」…</code></pre>
+  </div>
+
+  <footer class="footer">
+    <p>>_ For educational purposes only. Use at your own risk.</p>
+  </footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

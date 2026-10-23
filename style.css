@@ -1,0 +1,342 @@
+/* ===== Reset & Base ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0e0a;
+  --bg-panel: #0d1f0d;
+  --green: #00ff41;
+  --green-dim: #00cc33;
+  --red: #ff3131;
+  --red-dim: #cc0000;
+  --yellow: #ffcc00;
+  --text: #c8ffc8;
+  --border: #00ff41;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--green);
+  font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,65,0.03) 2px, rgba(0,255,65,0.03) 4px);
+}
+
+/* ===== Overlay / Agreement ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.agreement-box {
+  background: var(--bg-panel);
+  border: 2px solid var(--red);
+  border-radius: 4px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 30px rgba(255,49,49,0.4), inset 0 0 20px rgba(255,49,49,0.1);
+}
+
+.agreement-title {
+  color: var(--red);
+  text-align: center;
+  padding: 16px;
+  font-size: 18px;
+  border-bottom: 1px solid var(--red-dim);
+  text-shadow: 0 0 10px rgba(255,49,49,0.6);
+}
+
+.agreement-text {
+  padding: 20px;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text);
+  flex: 1;
+}
+
+.agreement-text p {
+  margin-bottom: 10px;
+}
+
+.agreement-warn {
+  color: var(--red);
+  font-weight: bold;
+  margin-top: 14px;
+  padding: 10px;
+  border: 1px dashed var(--red);
+  background: rgba(255,49,49,0.08);
+}
+
+.agree-btn {
+  margin: 16px;
+  padding: 14px;
+  background: #222;
+  color: #666;
+  border: 2px solid #444;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: not-allowed;
+  transition: all 0.3s;
+}
+
+.agree-btn.ready {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+  cursor: pointer;
+  text-shadow: 0 0 5px rgba(255,255,255,0.5);
+  box-shadow: 0 0 15px rgba(255,49,49,0.6);
+}
+
+.agree-btn.ready:hover {
+  background: #ff5050;
+  box-shadow: 0 0 25px rgba(255,49,49,0.9);
+}
+
+/* ===== Top Banner ===== */
+.top-banner {
+  background: var(--red);
+  color: #fff;
+  text-align: center;
+  padding: 12px 16px;
+  font-weight: bold;
+  font-size: 15px;
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  border-bottom: 3px solid var(--red-dim);
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* ===== Layout ===== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+.main-title {
+  text-align: center;
+  color: var(--green);
+  font-size: 22px;
+  margin: 20px 0;
+  text-shadow: 0 0 10px rgba(0,255,65,0.6);
+  letter-spacing: 2px;
+}
+
+/* ===== Panels ===== */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(0,255,65,0.15), inset 0 0 10px rgba(0,255,65,0.05);
+}
+
+.panel h3 {
+  color: var(--green);
+  margin-bottom: 16px;
+  font-size: 15px;
+  border-bottom: 1px dashed var(--green-dim);
+  padding-bottom: 8px;
+}
+
+/* ===== Form Elements ===== */
+.field-label {
+  display: block;
+  color: var(--yellow);
+  margin: 14px 0 6px;
+  font-size: 13px;
+}
+
+.terminal-input {
+  width: 100%;
+  background: #000;
+  color: var(--green);
+  border: 1px solid var(--green-dim);
+  border-radius: 3px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.terminal-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 8px rgba(0,255,65,0.4);
+}
+
+select.terminal-input option {
+  background: #000;
+  color: var(--green);
+}
+
+/* ===== Checkbox Group ===== */
+.checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+@media (min-width: 600px) {
+  .checkbox-group {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(0,255,65,0.05);
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.checkbox-item:hover {
+  background: rgba(0,255,65,0.12);
+}
+
+.checkbox-item input[type="checkbox"] {
+  margin-top: 3px;
+  accent-color: var(--green);
+  flex-shrink: 0;
+}
+
+.checkbox-item span {
+  color: var(--green);
+  font-weight: bold;
+}
+
+.checkbox-item em {
+  font-style: normal;
+  color: #888;
+  font-size: 12px;
+}
+
+.checkbox-item.danger span {
+  color: var(--red);
+}
+
+.checkbox-item.danger em {
+  color: #ff8888;
+}
+
+.checkbox-item.selfdel {
+  margin-top: 16px;
+  background: rgba(255,204,0,0.08);
+}
+
+.checkbox-item.selfdel span {
+  color: var(--yellow);
+}
+
+/* ===== Buttons ===== */
+.gen-btn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: var(--green);
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 15px rgba(0,255,65,0.5);
+  transition: all 0.2s;
+}
+
+.gen-btn:hover {
+  background: #33ff66;
+  box-shadow: 0 0 25px rgba(0,255,65,0.8);
+  transform: scale(1.01);
+}
+
+.gen-btn:active {
+  transform: scale(0.99);
+}
+
+.action-btn {
+  padding: 8px 16px;
+  background: #111;
+  color: var(--green);
+  border: 1px solid var(--green-dim);
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background: var(--green);
+  color: #000;
+  box-shadow: 0 0 10px rgba(0,255,65,0.5);
+}
+
+.output-actions {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+/* ===== Output ===== */
+.terminal-output {
+  background: #000;
+  border: 1px solid var(--green-dim);
+  border-radius: 3px;
+  padding: 16px;
+  overflow-x: auto;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #d0ffd0;
+  white-space: pre;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* syntax highlight */
+.tok-comment { color: #555; font-style: italic; }
+.tok-string { color: #ffcc66; }
+.tok-keyword { color: #ff66ff; font-weight: bold; }
+.tok-command { color: #00ff41; }
+.tok-var { color: #66ccff; }
+.tok-warning { color: #ff3131; font-weight: bold; }
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  color: #444;
+  font-size: 12px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px dashed #333;
+}
