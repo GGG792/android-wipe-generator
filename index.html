@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Android Root Wipe Script Generator</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 </head>
 <body>
 
@@ -42,10 +43,14 @@
     <label class="field-label">加密 / 打包方案</label>
     <select id="encryptMode" class="terminal-input">
       <option value="none">无加密（原始 .sh）</option>
-      <option value="makeself">makeself 自解压打包</option>
-      <option value="openssl">OpenSSL AES-256 加密脚本（运行时输入解密密码）</option>
-      <option value="shc">shc 编译为二进制</option>
+      <option value="makeself">makeself 自解压打包（Base64 内嵌载荷）</option>
+      <option value="openssl">OpenSSL AES-256-CBC 真实加密（运行时输密码解密）</option>
+      <option value="shc">shc 混淆编译（命令名运行时还原）</option>
+      <option value="vm">★ VM 虚拟加密（自定义字节码虚拟机，最强混淆）</option>
     </select>
+
+    <label class="field-label" id="pwdLabel" style="display:none">解密密码（运行脚本时需要输入）</label>
+    <input type="password" id="cryptoPassword" class="terminal-input" style="display:none" placeholder="设置一个强密码…" maxlength="64">
 
     <label class="field-label">要清理的 Android 目录（多选）</label>
     <div class="checkbox-group" id="dirList">
