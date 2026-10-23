@@ -340,3 +340,50 @@ select.terminal-input option {
   padding-top: 20px;
   border-top: 1px dashed #333;
 }
+
+/* ===== Mode notes ===== */
+.mode-notes {
+  background: rgba(255,204,0,0.08);
+  border: 1px dashed var(--yellow);
+  border-radius: 3px;
+  padding: 10px 12px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--yellow);
+  line-height: 1.6;
+  display: none;
+}
+
+/* ===== Password banner ===== */
+.pw-banner {
+  background: linear-gradient(90deg, rgba(255,204,0,0.15), rgba(255,49,49,0.15));
+  border: 2px solid var(--yellow);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 15px rgba(255,204,0,0.3);
+}
+
+.pw-label {
+  color: var(--yellow);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.pw-value {
+  color: #fff;
+  background: #000;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  letter-spacing: 1px;
+  border: 1px solid var(--yellow);
+  flex: 1;
+  min-width: 200px;
+  word-break: break-all;
+}
